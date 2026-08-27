@@ -3,8 +3,7 @@ name: Build Minecraft Mod
 on:
   push:
     branches:
-      - main
-      - master
+      - 26.2
   pull_request:
   workflow_dispatch:
 
@@ -17,7 +16,7 @@ concurrency:
 
 jobs:
   build:
-    name: Build 26.2 Mod
+    name: Build Mod
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
