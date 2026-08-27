@@ -3,7 +3,7 @@
   "id": "ohmyskyblockirc",
   "version": "${version}",
   "name": "OhMySkyblock IRC",
-  "description": "a cute description",
+  "description": "IRC client by SBHypixel",
   "authors": [
     "OhMySkyblock IRC"
   ],
