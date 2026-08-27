@@ -17,12 +17,11 @@ final class IrcCommands {
                         }))
                         .then(ClientCommands.literal("disconnect").executes(context -> {
                             connection.disconnect(false);
-                            context.getSource().sendFeedback(Component.literal("§7[§dirc§7]§r 已断开。"));
+                            context.getSource().sendFeedback(Component.literal("§7[§dirc§7]§r 已断开连接。"));
                             return 1;
                         }))
                         .then(ClientCommands.literal("status").executes(context -> {
                             context.getSource().sendFeedback(Component.literal("§7[§dirc§7]§r 状态：" + connection.state()));
-                            context.getSource().sendFeedback(Component.literal("§7[§dirc§7]§r 地址：" + config.endpoint));
                             return 1;
                         }))
                         .then(ClientCommands.literal("send")
@@ -38,7 +37,7 @@ final class IrcCommands {
                                 .then(ClientCommands.argument("endpoint", StringArgumentType.greedyString()).executes(context -> {
                                     config.endpoint = StringArgumentType.getString(context, "endpoint");
                                     config.save();
-                                    context.getSource().sendFeedback(Component.literal("§7[§dirc§7]§r 服务器地址已改为：" + config.endpoint));
+                                    context.getSource().sendFeedback(Component.literal("§7[§dirc§7]§r 选择的服务器已切换为：" + config.endpoint));
                                     return 1;
                                 })))
                         //.then(ClientCommands.literal("username")
@@ -50,7 +49,7 @@ final class IrcCommands {
                         //        })))
                         .then(ClientCommands.literal("reload").executes(context -> {
                             // Config is loaded once at client initialization; reconnect after changing the file.
-                            context.getSource().sendFeedback(Component.literal("§7[§dirc§7]§r 请修改配置文件后重启客户端；当前连接不会热重载。"));
+                            context.getSource().sendFeedback(Component.literal("§7[§dirc§7]§r 请在修改配置文件后重连，当前连接不会重载。"));
                             return 1;
                         }))
         ));

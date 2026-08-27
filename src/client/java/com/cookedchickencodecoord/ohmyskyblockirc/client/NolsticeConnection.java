@@ -123,7 +123,7 @@ final class NolsticeConnection implements WebSocket.Listener {
 
         state = State.CONNECTING;
 
-        notifyChat("§7[§dirc§7]§r 正在连接 " + uri + " …");
+        notifyChat("§7[§dirc§7]§r 正在连接服务器…");
 
         httpClient.newWebSocketBuilder()
                 .connectTimeout(Duration.ofSeconds(15))
@@ -185,7 +185,7 @@ final class NolsticeConnection implements WebSocket.Listener {
 
     boolean sendMessage(String text) {
         if (state != State.CONNECTED || !handshakeComplete) {
-            notifyChat("§7[§dirc§7]§r 服务器尚未连接，请先使用 /irc connect。");
+            notifyChat("§7[§dirc§7]§r 尚未连接，请先使用 /irc connect。");
             return false;
         }
 
@@ -201,7 +201,7 @@ final class NolsticeConnection implements WebSocket.Listener {
         }
 
         if (message.length() > 128) {
-            notifyChat("§7[§dirc§7]§r 消息太长，服务器限制为 128 个字符。");
+            notifyChat("§7[§dirc§7]§r 服务器限制为 128 个字符。");
             return false;
         }
 
@@ -230,7 +230,7 @@ final class NolsticeConnection implements WebSocket.Listener {
 
     void requestUsers() {
         if (state != State.CONNECTED) {
-            notifyChat("§7[§dirc§7]§r 尚未连接。");
+            notifyChat("§7[§dirc§7]§r 尚未连接服务器。");
             return;
         }
 
@@ -565,7 +565,7 @@ final class NolsticeConnection implements WebSocket.Listener {
         state = State.CONNECTED;
 
         notifyChat(
-                "§7[§dirc§7]§r 已完成握手。"
+                "§7[§dirc§7]§r 已完成连接。"
         );
     }
 
@@ -607,7 +607,7 @@ final class NolsticeConnection implements WebSocket.Listener {
         closeRequested.set(true);
 
         notifyChat(
-                "§7[§dirc§7]§r 被踢出频道：" + message
+                "§7[§dirc§7]§r 被踢出：" + message
         );
 
         disconnect(false);
@@ -617,7 +617,7 @@ final class NolsticeConnection implements WebSocket.Listener {
         closeRequested.set(true);
 
         notifyChat(
-                "§7[§dirc§7]§r 游戏被远程关闭：" + message
+                "§7[§dirc§7]§r 被踢出：" + message
         );
 
         disconnect(false);

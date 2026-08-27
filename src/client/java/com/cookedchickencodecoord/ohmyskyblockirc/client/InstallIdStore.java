@@ -1,16 +1,43 @@
 package com.cookedchickencodecoord.ohmyskyblockirc.client;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.UUID;
 
-final class InstallIdStore {
-    private InstallIdStore() {}
+public final class InstallIdStore {
 
-    static String ensure(IrcConfig config) {
-        if (config.installId != null && !config.installId.isBlank()) {
-            return config.installId;
+    private static final String PREFIX = "Admin_route:OhMySkyblockIRC:v0:";
+
+    private InstallIdStore() {
+    }
+
+    public static String getHwid(UUID minecraftUuid) {
+        return sha256(PREFIX + minecraftUuid);
+    }
+
+    private static String sha256(String value) {
+        try {
+            MessageDigest digest =
+                    MessageDigest.getInstance("SHA-256");
+
+            byte[] hash =
+                    digest.digest(value.getBytes(StandardCharsets.UTF_8));
+
+            StringBuilder result =
+                    new StringBuilder(hash.length * 2);
+
+            for (byte b : hash) {
+                result.append(String.format("%02x", b));
+            }
+
+            return result.toString();
+
+        } catch (NoSuchAlgorithmException e) {
+            throw new IllegalStateException(
+                    "SHA-256 is not available",
+                    e
+            );
         }
-        config.installId = UUID.randomUUID().toString();
-        config.save();
-        return config.installId;
     }
 }
