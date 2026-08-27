@@ -17,12 +17,12 @@ final class IrcCommands {
                         }))
                         .then(ClientCommands.literal("disconnect").executes(context -> {
                             connection.disconnect(false);
-                            context.getSource().sendFeedback(Component.literal("[IRC] 已断开。"));
+                            context.getSource().sendFeedback(Component.literal("§7[§dirc§7]§r 已断开。"));
                             return 1;
                         }))
                         .then(ClientCommands.literal("status").executes(context -> {
-                            context.getSource().sendFeedback(Component.literal("[IRC] 状态：" + connection.state()));
-                            context.getSource().sendFeedback(Component.literal("[IRC] 地址：" + config.endpoint));
+                            context.getSource().sendFeedback(Component.literal("§7[§dirc§7]§r 状态：" + connection.state()));
+                            context.getSource().sendFeedback(Component.literal("§7[§dirc§7]§r 地址：" + config.endpoint));
                             return 1;
                         }))
                         .then(ClientCommands.literal("send")
@@ -38,19 +38,19 @@ final class IrcCommands {
                                 .then(ClientCommands.argument("endpoint", StringArgumentType.greedyString()).executes(context -> {
                                     config.endpoint = StringArgumentType.getString(context, "endpoint");
                                     config.save();
-                                    context.getSource().sendFeedback(Component.literal("[IRC] 服务器地址已改为：" + config.endpoint));
+                                    context.getSource().sendFeedback(Component.literal("§7[§dirc§7]§r 服务器地址已改为：" + config.endpoint));
                                     return 1;
                                 })))
-                        .then(ClientCommands.literal("username")
-                                .then(ClientCommands.argument("username", StringArgumentType.word()).executes(context -> {
-                                    config.username = StringArgumentType.getString(context, "username");
-                                    config.save();
-                                    context.getSource().sendFeedback(Component.literal("[IRC] IRC 用户名已改为：" + config.username));
-                                    return 1;
-                                })))
+                        //.then(ClientCommands.literal("username")
+                        //        .then(ClientCommands.argument("username", StringArgumentType.word()).executes(context -> {
+                        //            config.username = StringArgumentType.getString(context, "username");
+                        //            config.save();
+                        //            context.getSource().sendFeedback(Component.literal("[IRC] IRC 用户名已改为：" + config.username));
+                        //            return 1;
+                        //        })))
                         .then(ClientCommands.literal("reload").executes(context -> {
                             // Config is loaded once at client initialization; reconnect after changing the file.
-                            context.getSource().sendFeedback(Component.literal("[IRC] 请修改配置文件后重启客户端；当前连接不会热重载。"));
+                            context.getSource().sendFeedback(Component.literal("§7[§dirc§7]§r 请修改配置文件后重启客户端；当前连接不会热重载。"));
                             return 1;
                         }))
         ));

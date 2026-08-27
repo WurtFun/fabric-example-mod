@@ -13,7 +13,7 @@ import java.util.Properties;
 final class IrcConfig {
     private static final String FILE_NAME = "ohmyskyblockirc.properties";
 
-    String endpoint = "ws://127.0.0.1:33651/ws";
+    String endpoint = "ws://irc.sbhypixel.net:33651/ws";
     String username = "";
     String clientName = "OhMySkyblockIRC";
     String installId = "";
