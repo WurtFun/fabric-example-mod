@@ -12,7 +12,7 @@ public final class OhMySkyblockIRCClient implements ClientModInitializer {
     public void onInitializeClient() {
         Path configDir = FabricLoader.getInstance().getConfigDir();
         IrcConfig config = IrcConfig.load(configDir);
-        InstallIdStore.ensure(config);
+        //InstallIdStore.ensure(config);
 
         Minecraft minecraft = Minecraft.getInstance();
         NolsticeConnection connection = new NolsticeConnection(config, minecraft);

@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public final class InstallIdStore {
 
-    private static final String PREFIX = "Admin_route:OhMySkyblockIRC:v0:";
+    private static final String PREFIX = "OhMySkyblockIRC_v0:";
 
     private InstallIdStore() {
     }
